@@ -1,5 +1,6 @@
 # Art
 dalvik.vm.dex2oat-flags=--no-watch-dog
+dalvik.vm.dex2oat-swap=false
 
 # Audio
 tunnel.audio.encode=false
@@ -25,13 +26,16 @@ ro.config.max_starting_bg=8
 ro.qualcomm.bt.hci_transport=smd
 
 # Display
+debug.sf.hw=1
+debug.egl.hw=1
 debug.composition.type=c2d
 debug.sf.gpu_comp_tiling=1
 debug.mdpcomp.idletime=600
 persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true
-ro.opengles.version=196608
-debug.enable.sglscale=1
+ro.opengles.version=196609
+debug.enable.sglscale=0
+debug.mdpcomp.logs=0
 
 # GPS
 persist.gps.qc_nlp_in_use=0
@@ -62,7 +66,7 @@ persist.timed.enable=true
 # perf
 ro.core_ctl_min_cpu=2
 ro.core_ctl_max_cpu=4
-ro.min_freq_0=800000
+ro.min_freq_0=400000
 ro.vendor.extension_library=libqti-perfd-client.so
 
 #Trim properties
