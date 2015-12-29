@@ -103,7 +103,7 @@ PRODUCT_PACKAGES += \
 
 # IO Scheduler
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.io.scheduler=noop
+    sys.io.scheduler=row
 
 # IRSC
 PRODUCT_COPY_FILES += \

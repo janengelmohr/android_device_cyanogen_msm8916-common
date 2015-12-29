@@ -36,15 +36,11 @@ on early-init
     symlink /data/tombstones /tombstones
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so
-
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
-
-
 
 on fs
     mount_all fstab.qcom
@@ -74,6 +70,9 @@ on post-fs-data
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
+
+    mkdir /data/media 0770 media_rw media_rw
+    restorecon_recursive /data/media
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -213,6 +212,8 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
     setprop wifi.interface wlan0
     setprop ro.telephony.call_ring.multiple false
 
@@ -290,6 +291,7 @@ on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
 
 on property:vold.decrypt=trigger_restart_framework
+    start config_bt_addr
     start config_bluetooth
 
 on property:persist.env.fastdorm.enabled=true
@@ -308,6 +310,12 @@ service rfs_access /system/bin/rfs_access
    class core
    user system
    group system net_raw
+
+service config_bt_addr /system/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
+    oneshot
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
@@ -552,9 +560,3 @@ service wcnss-service /system/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
-
-#service fm_dl /system/etc/init.qcom.fm.sh
-#    class late_start
-#    user system
-#    group system
-#    oneshot

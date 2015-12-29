@@ -22,6 +22,7 @@ TARGET_CYANOGEN_COMMON := msm8916
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
@@ -98,15 +99,6 @@ MALLOC_IMPL := dlmalloc
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-
-# Dex
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
 
 # Display
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY := true
