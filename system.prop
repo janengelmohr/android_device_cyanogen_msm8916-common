@@ -26,13 +26,16 @@ ro.config.max_starting_bg=8
 ro.qualcomm.bt.hci_transport=smd
 
 # Display
+debug.sf.hw=1
+debug.egl.hw=1
 debug.composition.type=c2d
 debug.sf.gpu_comp_tiling=1
 debug.mdpcomp.idletime=600
 persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true
 ro.opengles.version=196609
-debug.enable.sglscale=1
+debug.enable.sglscale=0
+debug.mdpcomp.logs=0
 
 # GPS
 persist.gps.qc_nlp_in_use=0
